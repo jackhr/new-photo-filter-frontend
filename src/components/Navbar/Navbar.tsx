@@ -6,6 +6,7 @@ export default function Navbar() {
             <div className="container mx-auto flex justify-between items-center">
                 <Link to="/" className="text-white hover:text-white font-bold">Home</Link>
                 <Link to="/about" className="text-white hover:text-white">About</Link>
+                <Link to="/login" className="text-white hover:text-white">Login</Link>
             </div>
         </nav>
     )
