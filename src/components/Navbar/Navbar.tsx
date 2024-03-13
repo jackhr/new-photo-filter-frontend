@@ -6,9 +6,9 @@ import { UserContext } from "../../contexts/userContext";
 export default function Navbar() {
     const navigate = useNavigate();
     const { user, setUser } = useContext(UserContext);
-    const handleLogout = (e: MouseEvent) => {
+    const handleSignOut = (e: MouseEvent) => {
         e.preventDefault();
-        UsersService.logOut();
+        UsersService.signOut();
         setUser(null);
         navigate('/');
     }
@@ -22,7 +22,7 @@ export default function Navbar() {
                 {user ? (
                     <>
                         <span className={linkClass}>Hello, {user.name}</span>
-                        <Link to="" onClick={e => handleLogout(e)} className={linkClass}>Logout</Link>
+                        <Link to="" onClick={e => handleSignOut(e)} className={linkClass}>Sign Out</Link>
                     </>
                 ) : (
                     <div className="flex items-center gap-10">

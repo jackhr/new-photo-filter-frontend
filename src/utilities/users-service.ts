@@ -1,9 +1,9 @@
 import { MainRes, User, UserLoginData, UserSignUpData } from '../types';
 import * as usersAPI from './users-api';
 
-export async function login(credentials: UserLoginData): Promise<MainRes> {
+export async function signIn(credentials: UserLoginData): Promise<MainRes> {
     try {
-        const res = await usersAPI.login(credentials);
+        const res = await usersAPI.signIn(credentials);
         if (res.success && res.data) {
             localStorage.setItem('token', res.data.token);
             delete res.data.token;
@@ -51,7 +51,7 @@ export async function signUp(userData: UserSignUpData) {
     }
 }
 
-export function logOut() {
+export function signOut() {
     localStorage.removeItem('token');
 }
 

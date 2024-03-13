@@ -10,8 +10,8 @@ export function signUp(userData: UserSignUpData) {
     });
 }
 
-export function login(userData: UserLoginData) {
-    return sendRequest(`${BASE_URL}/login`, {
+export function signIn(userData: UserLoginData) {
+    return sendRequest(`${BASE_URL}/signIn`, {
         method: 'POST',
         payload: userData,
     });

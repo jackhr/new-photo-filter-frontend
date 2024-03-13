@@ -1,4 +1,4 @@
-import LoginForm from "../../components/LoginForm/LoginForm";
+import SignInForm from "../../components/SignInForm/SignInForm";
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
 
 interface AuthPageProps {
@@ -6,5 +6,5 @@ interface AuthPageProps {
 }
 
 export default function AuthPage({ showLogin }: AuthPageProps) {    
-    return showLogin ? <LoginForm /> : <SignUpForm />;
+    return showLogin ? <SignInForm /> : <SignUpForm />;
 }

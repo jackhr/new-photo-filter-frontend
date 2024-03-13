@@ -5,11 +5,11 @@ import { UserContext } from "../../contexts/userContext";
 import { FormEvent, useContext } from "react";
 import * as UsersService from "../../utilities/users-service";
 
-export default function LoginForm() {
+export default function SignInForm() {
     const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
 
-    const handleLogin = async (e: FormEvent) => {
+    const handleSignIn = async (e: FormEvent) => {
         e.preventDefault();
         const form = e.target as HTMLFormElement;
         const formData = new FormData(form);
@@ -17,7 +17,7 @@ export default function LoginForm() {
             email: formData.get("email") as string,
             password: formData.get("password") as string,
         };
-        const res = await UsersService.login(data);
+        const res = await UsersService.signIn(data);
         if (res.success) {
             setUser(res?.data?.user as User);
             navigate('/');
@@ -34,10 +34,10 @@ export default function LoginForm() {
 
     return (
         <div className="border-solid border-grey m-8 p-6">
-            <Form className="flex flex-col items-center gap-4" method="post" onSubmit={e => handleLogin(e)}>
+            <Form className="flex flex-col items-center gap-4" method="post" onSubmit={e => handleSignIn(e)}>
                 <input className={inputClass} type="email" name="email" placeholder="Email" />
                 <input className={inputClass} type="password" name="password" placeholder="Password"/>
-                <button className="bg-black text-white" type="submit">Login</button>
+                <button className="bg-black text-white" type="submit">SignIn</button>
             </Form>
         </div>
     );
