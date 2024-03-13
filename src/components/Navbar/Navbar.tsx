@@ -14,10 +14,14 @@ export default function Navbar() {
     return (
         <nav className="bg-blue-500 p-4 fixed top-0 left-0 w-full">
             <div className="container mx-auto flex justify-between items-center">
-                <Link to="/" className={`${linkClass} font-bold`}>Home</Link>
-                <Link to="/about" className={linkClass}>About</Link>
+                <Link to="/" className={`${linkClass} font-bold`}>
+                    <img src="/assets/images/photo-filter-logo.svg" className="h-12" alt="Photo Filter Logo" title="Home" />
+                </Link>
                 {user ? (
-                    <Link to="" onClick={e => handleLogout(e)} className={linkClass}>Logout</Link>
+                    <>
+                        <span className={linkClass}>Hello, {user.name}</span>
+                        <Link to="" onClick={e => handleLogout(e)} className={linkClass}>Logout</Link>
+                    </>
                 ) : (
                     <Link to="/login" className={linkClass}>Login</Link>
                 )}
