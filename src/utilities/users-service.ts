@@ -28,11 +28,26 @@ export async function login(credentials: UserLoginData): Promise<MainRes> {
 
 export async function signUp(userData: UserSignUpData) {
     try {
-        await usersAPI.signUp(userData);
-        // localStorage.setItem('token', token);
-        return getUser();
-    } catch {
-        throw new Error('Invalid Sign Up');
+        const res = await usersAPI.signUp(userData);
+        if (res.success && res.data) {
+            localStorage.setItem('token', res.data.token);
+            delete res.data.token;
+            res.data.user = getUser();
+        } else {
+            res.data = {
+                message: res?.data?.message,
+                user: null
+            };
+        }
+        return res;
+    } catch(err) {
+        return {
+            success: false,
+            data: {
+                message: (err as Error).message,
+                user: null
+            }
+        };
     }
 }
 

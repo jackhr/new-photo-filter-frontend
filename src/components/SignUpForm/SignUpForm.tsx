@@ -3,6 +3,8 @@ import { Form, useNavigate } from "react-router-dom";
 import * as UsersService from "../../utilities/users-service";
 import { UserContext } from "../../contexts/userContext";
 import { AuthPageContext } from "../../contexts/authPageContext";
+import { User } from "../../types";
+import swal from "sweetalert";
 
 export default function SignUpForm() {
     const { setUser } = useContext(UserContext);
@@ -21,9 +23,17 @@ export default function SignUpForm() {
             email: formData.get("email") as string,
             password: formData.get("password") as string,
         };
-        const user = await UsersService.signUp(data);
-        setUser(user);
-        navigate('/');
+        const res = await UsersService.signUp(data);
+        if (res.success) {
+            setUser(res?.data?.user as User);
+            navigate('/');
+        } else {
+            swal({
+                text: res?.data?.message,
+                title: "Error",
+                icon: "error",
+            });
+        }
     }
 
     const inputClass = "border-solid border-2 border-grey p-1 rounded";
