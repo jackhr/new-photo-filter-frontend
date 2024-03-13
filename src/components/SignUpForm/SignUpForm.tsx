@@ -1,5 +1,6 @@
 import { FormEvent, MouseEvent } from "react";
 import { Form } from "react-router-dom";
+import { signUp } from "../../utilities/users-api";
 
 interface SignUpFormProps {
     showLogin: boolean;
@@ -11,15 +12,15 @@ export default function SignUpForm({ showLogin, setShowLogin }: SignUpFormProps)
         e.preventDefault();
         setShowLogin(!showLogin);
     }
-    const handleSignUp = (e: FormEvent<HTMLFormElement>) => {
+    const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const form = e.target as HTMLFormElement;
         const formData = new FormData(form);
         const data = {
-            username: formData.get("username"),
-            password: formData.get("password"),
+            username: formData.get("username") as string,
+            password: formData.get("password") as string,
         };
-        console.log(data);
+        await signUp(data);
     }
     return (
         <Form className="flex flex-col items-center gap-4" method="post" onSubmit={e => handleSignUp(e)}>
