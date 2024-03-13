@@ -1,20 +1,35 @@
-import { User, UserLoginData, UserSignUpData } from '../types';
+import { MainRes, User, UserLoginData, UserSignUpData } from '../types';
 import * as usersAPI from './users-api';
 
-export async function login(credentials: UserLoginData) {
+export async function login(credentials: UserLoginData): Promise<MainRes> {
     try {
-        const token = await usersAPI.login(credentials);
-        localStorage.setItem('token', token);
-        return getUser();
-    } catch {
-        throw new Error('Invalid Credentials - Try Again');
+        const res = await usersAPI.login(credentials);
+        if (res.success && res.data) {
+            localStorage.setItem('token', res.data.token);
+            delete res.data.token;
+            res.data.user = getUser();
+        } else {
+            res.data = {
+                message: res?.data?.message,
+                user: null
+            };
+        }
+        return res;
+    } catch(err) {
+        return {
+            success: false,
+            data: {
+                message: (err as Error).message,
+                user: null
+            }
+        };
     }
 }
 
 export async function signUp(userData: UserSignUpData) {
     try {
-        const token = await usersAPI.signUp(userData);
-        localStorage.setItem('token', token);
+        await usersAPI.signUp(userData);
+        // localStorage.setItem('token', token);
         return getUser();
     } catch {
         throw new Error('Invalid Sign Up');

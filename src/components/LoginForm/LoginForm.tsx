@@ -1,7 +1,9 @@
-import { FormEvent, MouseEvent, useContext } from "react";
+import swal from "sweetalert";
+import { User } from "../../types";
 import { Form, useNavigate } from "react-router-dom";
-import * as UsersService from "../../utilities/users-service";
 import { UserContext } from "../../contexts/userContext";
+import { FormEvent, MouseEvent, useContext } from "react";
+import * as UsersService from "../../utilities/users-service";
 import { AuthPageContext } from "../../contexts/authPageContext";
 
 export default function LoginForm() {
@@ -21,9 +23,17 @@ export default function LoginForm() {
             email: formData.get("email") as string,
             password: formData.get("password") as string,
         };
-        const user = await UsersService.login(data);
-        setUser(user);
-        navigate('/');
+        const res = await UsersService.login(data);
+        if (res.success) {
+            setUser(res?.data?.user as User);
+            navigate('/');
+        } else {
+            swal({
+                text: res?.data?.message,
+                title: "Error",
+                icon: "error",
+            });
+        }
     }
 
     const inputClass = "border-solid border-2 border-grey p-1 rounded";

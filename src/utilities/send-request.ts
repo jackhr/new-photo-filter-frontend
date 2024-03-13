@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig, Method } from 'axios';
 import { getToken } from './users-service';
+import { MainRes } from '../types';
 
 // Define TypeScript interface for optional function parameters
 interface SendRequestOptions {
@@ -29,15 +30,23 @@ export async function sendRequest(url: string, options: SendRequestOptions = {})
         axiosConfig.headers['Authorization'] = `Bearer ${token}`;
     }
 
+    const res = {
+        data: null,
+        success: true,
+    } as MainRes;
     try {
         const response = await axios(axiosConfig);
-        return response.data;
+        res.data = response.data;
     } catch (error) {
+        res.success = false;
         if (axios.isAxiosError(error)) {
-            throw new Error(error.response?.statusText || 'Bad Request');
+            res.data = error.response?.data;
         } else {
             // Handle unexpected errors
-            throw new Error('An unexpected error occurred');
+            res.data = {
+                message: 'An unexpected error occurred'
+            };
         }
     }
+    return res;
 }

@@ -1,3 +1,8 @@
+export type MainRes = {
+    data: Partial<any> | null;
+    success: boolean
+}
+
 export interface LoginFormProps {
     showLogin: boolean;
     setShowLogin: (showLogin: boolean) => void;
