@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Dispatch, ReactNode, SetStateAction, createContext, useState } from "react";
 
 type AuthPageProviderProps = {
