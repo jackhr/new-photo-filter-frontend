@@ -27,7 +27,7 @@ export default function Navbar() {
                 ) : (
                     <div className="flex items-center gap-10">
                         <Link to="/sign-in" className={linkClass}>Sign In</Link>
-                        <Link to="/sign-up" className="flex bg-white rounded-lg px-8 py-2 text-blue-500 font-bold transition-all hover:bg-transparent hover:text-white border-2 border-solid border-white active:bg-white active:text-blue-500">Sign Up</Link>
+                        <Link to="/sign-up" className="bg-white rounded-lg px-8 py-2 text-blue-500 font-bold transition-all hover:bg-transparent hover:text-white border-2 border-solid border-white active:bg-white active:text-blue-500">Sign Up</Link>
                     </div>
                 )}
             </div>

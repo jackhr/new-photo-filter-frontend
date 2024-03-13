@@ -37,7 +37,7 @@ export default function SignUpForm() {
             <input className={inputClass} type="text" name="username" placeholder="Username" />
             <input className={inputClass} type="email" name="email" placeholder="Email"/>
             <input className={inputClass} type="password" name="password" placeholder="Password"/>
-            <button className="bg-black text-white" type="submit">Create</button>
+            <button className="bg-blue-500 rounded-lg px-8 py-2 text-white font-bold transition-all hover:bg-transparent hover:text-blue-500 border-2 border-solid border-blue-500 active:bg-white active:text-white w-full" type="submit">Sign Up</button>
         </Form>
     );
 }
