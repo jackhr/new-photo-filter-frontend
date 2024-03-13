@@ -4,18 +4,18 @@ import About from '../About/About'
 import Login from '../AuthPage/AuthPage'
 import RootLayout from '../../layouts/Root/RootLayout';
 import Index from '../Index/Index';
-import { useState } from 'react';
-import * as UsersService from '../../utilities/users-service';
+// import { useContext } from 'react';
+// import { UserContext } from '../../contexts/userContext';
 
 function App() {
-    const [user, setUser] = useState(UsersService.getUser());
+    // const { user } = useContext(UserContext);
 
     const router = createBrowserRouter(
         createRoutesFromElements(
-            <Route path="/" element={<RootLayout user={user} setUser={setUser} />}>
+            <Route path="/" element={<RootLayout />}>
                 <Route path="/" element={<Index />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/login" element={<Login user={user} setUser={setUser} />} />
+                <Route path="/login" element={<Login />} />
             </Route>
         )
     );

@@ -1,9 +1,11 @@
-import { FormEvent, MouseEvent } from "react";
+import { FormEvent, MouseEvent, useContext } from "react";
 import { Form, useNavigate } from "react-router-dom";
 import * as UsersService from "../../utilities/users-service";
 import { LoginFormProps } from "../../types";
+import { UserContext } from "../../contexts/userContext";
 
-export default function SignUpForm({ showLogin, setShowLogin, setUser }: LoginFormProps) {
+export default function SignUpForm({ showLogin, setShowLogin }: LoginFormProps) {
+    const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
     const viewOtherForm = (e: MouseEvent) => {
         e.preventDefault();

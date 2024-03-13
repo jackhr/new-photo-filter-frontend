@@ -1,15 +1,10 @@
 import { Link } from "react-router-dom";
-import { User } from "../../types";
-import { MouseEvent } from "react";
+import { MouseEvent, useContext } from "react";
 import * as UsersService from "../../utilities/users-service";
+import { UserContext } from "../../contexts/userContext";
 
-interface RootLayoutProps {
-    user: User | null;
-    setUser: (user: User | null) => void;
-}
-
-
-export default function Navbar({ user, setUser }: RootLayoutProps) {
+export default function Navbar() {
+    const { user, setUser } = useContext(UserContext);
     const handleLogout = (e: MouseEvent) => {
         e.preventDefault();
         UsersService.logOut();
