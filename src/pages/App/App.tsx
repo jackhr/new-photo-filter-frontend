@@ -1,9 +1,10 @@
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom'
 import './App.css'
 import About from '../About/About'
-import Login from '../AuthPage/AuthPage'
+import AuthPage from '../AuthPage/AuthPage'
 import RootLayout from '../../layouts/Root/RootLayout';
 import Index from '../Index/Index';
+import AuthPageContextProvider from '../../contexts/authPageContext';
 // import { useContext } from 'react';
 // import { UserContext } from '../../contexts/userContext';
 
@@ -15,7 +16,14 @@ function App() {
             <Route path="/" element={<RootLayout />}>
                 <Route path="/" element={<Index />} />
                 <Route path="/about" element={<About />} />
-                <Route path="/login" element={<Login />} />
+                <Route
+                    path="/login"
+                    element={
+                        <AuthPageContextProvider initialState={true}>
+                            <AuthPage />
+                        </AuthPageContextProvider>
+                    }
+                />
             </Route>
         )
     );
