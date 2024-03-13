@@ -1,9 +1,30 @@
-export interface LoginFormProps {
+export interface LoginFormProps extends userProps {
     showLogin: boolean;
     setShowLogin: (showLogin: boolean) => void;
 }
 
+export interface userProps {
+    user: User | null;
+    setUser: (user: User | null) => void;
+}
+
 export interface UserSignUpData {
-    username: string;
+    name: string;
+    email: string;
     password: string;
+}
+
+export interface UserLoginData {
+    email: string;
+    password: string;
+}
+
+type User = {
+    _v: number;
+    _id: string;
+    name: string;
+    email: string;
+    password?: string;
+    createdAt: string;
+    updatedAt: string;
 }

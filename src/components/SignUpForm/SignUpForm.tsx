@@ -1,32 +1,35 @@
 import { FormEvent, MouseEvent } from "react";
-import { Form } from "react-router-dom";
-import { signUp } from "../../utilities/users-api";
+import { Form, useNavigate } from "react-router-dom";
+import * as UsersService from "../../utilities/users-service";
+import { LoginFormProps } from "../../types";
 
-interface SignUpFormProps {
-    showLogin: boolean;
-    setShowLogin: (showLogin: boolean) => void;
-}
-
-export default function SignUpForm({ showLogin, setShowLogin }: SignUpFormProps) {
-    const viewOtherForm = (e: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+export default function SignUpForm({ showLogin, setShowLogin, setUser }: LoginFormProps) {
+    const navigate = useNavigate();
+    const viewOtherForm = (e: MouseEvent) => {
         e.preventDefault();
         setShowLogin(!showLogin);
     }
-    const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
+    const handleSignUp = async (e: FormEvent) => {
         e.preventDefault();
         const form = e.target as HTMLFormElement;
         const formData = new FormData(form);
         const data = {
-            username: formData.get("username") as string,
+            name: formData.get("username") as string,
+            email: formData.get("email") as string,
             password: formData.get("password") as string,
         };
-        await signUp(data);
+        const user = await UsersService.signUp(data);
+        setUser(user);
+        navigate('/');
     }
+
+    const inputClass = "border-solid border-2 border-grey p-1 rounded";
+
     return (
         <Form className="flex flex-col items-center gap-4" method="post" onSubmit={e => handleSignUp(e)}>
-            <input className="border-solid border-2 border-grey p-1 rounded" type="text" name="username" placeholder="Username" />
-            <input className="border-solid border-2 border-grey p-1 rounded" type="password" name="password" placeholder="New Password"/>
-            <input className="border-solid border-2 border-grey p-1 rounded" type="password" name="confirm-password" placeholder="Confirm Password"/>
+            <input className={inputClass} type="text" name="username" placeholder="Username" />
+            <input className={inputClass} type="email" name="email" placeholder="Email"/>
+            <input className={inputClass} type="password" name="password" placeholder="Password"/>
             <button className="bg-black text-white" type="submit">Create</button>
             <span>
                 Already a user?

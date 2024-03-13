@@ -1,4 +1,31 @@
-export function getToken() {
+import { User, UserLoginData, UserSignUpData } from '../types';
+import * as usersAPI from './users-api';
+
+export async function login(credentials: UserLoginData) {
+    try {
+        const token = await usersAPI.login(credentials);
+        localStorage.setItem('token', token);
+        return getUser();
+    } catch {
+        throw new Error('Invalid Credentials - Try Again');
+    }
+}
+
+export async function signUp(userData: UserSignUpData) {
+    try {
+        const token = await usersAPI.signUp(userData);
+        localStorage.setItem('token', token);
+        return getUser();
+    } catch {
+        throw new Error('Invalid Sign Up');
+    }
+}
+
+export function logOut() {
+    localStorage.removeItem('token');
+}
+
+export function getToken(): string | null {
     // getItem returns null if there's no string
     const token = localStorage.getItem('token');
     if (!token) return null;
@@ -11,4 +38,10 @@ export function getToken() {
         return null;
     }
     return token;
+}
+
+export function getUser(): User | null {
+    const token = getToken();
+    // If there's a token, return the user in the payload, otherwise return null
+    return token ? JSON.parse(atob(token.split('.')[1])).user : null;
 }
