@@ -1,4 +1,5 @@
 import './App.css'
+import Index from '../Index/Index';
 import { useContext } from 'react';
 import AuthPage from '../AuthPage/AuthPage'
 import ErrorPage from '../ErrorPage/ErrorPage';
@@ -11,7 +12,6 @@ import {
     createBrowserRouter,
     createRoutesFromElements
 } from 'react-router-dom'
-import Index from '../Index/Index';
 
 function App() {
     const { user } = useContext(UserContext);
