@@ -17,7 +17,7 @@ export default function Navbar() {
         <nav className="bg-blue-500 p-4 fixed top-0 left-0 w-full">
             <div className="container mx-auto flex justify-between items-center">
                 <Link to="/" className={linkClass}>
-                    <img src="/assets/images/photo-filter-logo.svg" className="h-12" alt="Photo Filter Logo" title="Home" />
+                    <img src="/assets/images/photo-filter-logo.svg" className={`h-12 ${user ? "animate-spin-slow" : ""}`} alt="Photo Filter Logo" title="Home" />
                 </Link>
                 {user ? (
                     <>
