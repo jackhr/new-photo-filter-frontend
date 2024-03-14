@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -14,6 +16,13 @@
     -webkit-font-smoothing : antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+.press-start {
+    font-family: "Press Start 2P", system-ui;
+    font-weight: 400;
+    font-style : normal;
+}
+
 
 a {
     font-weight    : 500;
