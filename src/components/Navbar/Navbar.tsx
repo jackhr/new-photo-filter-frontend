@@ -22,7 +22,7 @@ export default function Navbar() {
                 {user ? (
                     <>
                         <span className={linkClass}>Hello, {user.name}</span>
-                        <Link to="" onClick={e => handleSignOut(e)} className={linkClass}>Sign Out</Link>
+                        <Link to="" onClick={e => handleSignOut(e)} className="bg-white rounded-lg px-8 py-2 text-blue-500 font-bold transition-all hover:bg-transparent hover:text-white border-2 border-solid border-white active:bg-white active:text-blue-500">Sign Out</Link>
                     </>
                 ) : (
                     <div className="flex items-center gap-10">
