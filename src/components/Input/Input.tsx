@@ -12,7 +12,7 @@ interface InputProps {
 export default function Input({
     type="text",
     placeholder="",
-    className="border border-gray-300 p-4 rounded-md",
+    className="border border-gray-300 p-4 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-transparent w-full transition-all duration-200 ease-in-out",
     name = "",
     title,
 }: InputProps) {
