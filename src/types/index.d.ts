@@ -28,3 +28,15 @@ type User = {
     createdAt: string;
     updatedAt: string;
 }
+
+type Photo = {
+    _v: number;
+    _id: string;
+    name: string;
+    user: User;
+    sourceURL: string;
+    newEditURLs: string[];
+    AWSKey: string;
+    createdAt: string;
+    updatedAt: string;
+}

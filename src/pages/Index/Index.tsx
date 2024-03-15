@@ -1,11 +1,24 @@
 import "./Index.css"
 import swal from "sweetalert";
+import { Photo } from "../../types";
+import { Upload } from "lucide-react";
+import { useEffect, useContext } from "react";
 import * as photosAPI from "../../utilities/photos-api";
+import { PhotosContext } from "../../contexts/photosContext";
 
 export default function Index() {
+    const { photos, setPhotos } = useContext(PhotosContext);
+    useEffect(function () {
+        async function getPhotos() {
+            const res = await photosAPI.getAll();
+            console.log(res);
+            setPhotos(res.data?.photos as Photo[]);
+        }
+        getPhotos();
+    }, []);
+
     const handleImageInputClick = () => {
-        const label = document.getElementById("photo-upload-label");
-        label && label.click();
+        document.getElementById("photo-upload-input")?.click();
     }
     const handleProcessIncomingPhoto = async () => {
         const input = document.getElementById('photo-upload-input');
@@ -38,18 +51,17 @@ export default function Index() {
             console.log("res:", res);
         }
     }
-    
-    const className = "bg-blue-500 w-52 h-52 rounded-md relative cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out text-white font-bold flex justify-center items-center text-2xl";
+
+    const buttonClass = "bg-blue-500 w-52 h-52 rounded-md relative cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out text-white font-bold flex justify-center items-center text-2xl";
 
     return (
         <>
-            <div className="grid grid-cols-2 grid-rows-2 gap-8">
-                <div className={className} onClick={handleImageInputClick}>Upload</div>
-                <div className={className}>Experiment</div>
-                <div className={className}>My Photos</div>
-                <div className={className}>My Templates</div>
-                <label id="photo-upload-label" htmlFor="photo-upload-input"></label>
-                <input type="file" id="photo-upload-input" className="hidden" onChange={handleProcessIncomingPhoto} />
+            <input type="file" id="photo-upload-input" className="hidden" onChange={handleProcessIncomingPhoto} />
+            <span>You have {photos.length} photo{photos.length ? "" : "s"}</span>
+            <h1 className="text-bold font-medium mb-12">Select a photo to begin</h1>
+            <div className="flex flex-col items-center justify-center border-4 border-dashed m-auto p-8 rounded-xl cursor-pointer gap-6" onClick={handleImageInputClick}>
+                <Upload size="5rem" className="text-blue-500" />
+                <div className={`${buttonClass} w-64 !h-12 text-xl`}>Select Photo</div>
             </div>
         </>
     )
