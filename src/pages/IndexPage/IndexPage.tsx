@@ -1,12 +1,13 @@
-import "./Index.css"
+import "./IndexPage.css"
 import swal from "sweetalert";
 import { Photo } from "../../types";
 import { Upload } from "lucide-react";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import * as photosAPI from "../../utilities/photos-api";
 import { PhotosContext } from "../../contexts/photosContext";
 
-export default function Index() {
+export default function IndexPage() {
+    const [uploading, setUploading] = useState(true);
     const { photos, setPhotos } = useContext(PhotosContext);
     useEffect(function () {
         async function getPhotos() {
@@ -15,7 +16,7 @@ export default function Index() {
             setPhotos(res.data?.photos as Photo[]);
         }
         getPhotos();
-    }, []);
+    }, [setPhotos]);
 
     const handleImageInputClick = () => {
         document.getElementById("photo-upload-input")?.click();
@@ -53,16 +54,35 @@ export default function Index() {
     }
 
     const buttonClass = "bg-blue-500 w-52 h-52 rounded-md relative cursor-pointer hover:scale-105 transition-all duration-300 ease-in-out text-white font-bold flex justify-center items-center text-2xl";
+    
+    const tabClass = "bg-blue-500 w-1/2 text-center cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-600 active:bg-blue-700 text-white font-bold p-4";
+
+    const activeTabClass = "bg-blue-700 hover:bg-blue-700 active:bg-blue-700";
 
     return (
-        <>
-            <input type="file" id="photo-upload-input" className="hidden" onChange={handleProcessIncomingPhoto} />
-            <span>You have {photos.length} photo{photos.length ? "" : "s"}</span>
-            <h1 className="text-bold font-medium mb-12">Select a photo to begin</h1>
-            <div className="flex flex-col items-center justify-center border-4 border-dashed m-auto p-8 rounded-xl cursor-pointer gap-6" onClick={handleImageInputClick}>
-                <Upload size="5rem" className="text-blue-500" />
-                <div className={`${buttonClass} w-64 !h-12 text-xl`}>Select Photo</div>
+        <div className="h-full relative flex flex-col justify-center items-center border-blue-300 border-t-2">
+            <div className="absolute top-0 flex w-full">
+                <div
+                    onClick={() => setUploading(true)}
+                    className={`${tabClass} ${uploading ? activeTabClass : ""}`}
+                >Upload</div>
+                <div
+                    onClick={() => setUploading(false)}
+                    className={`${tabClass} ${!uploading ? activeTabClass : ""}`}
+                >My Photos ({photos.length})</div>
             </div>
-        </>
+            {uploading ? (
+                <>
+                    <input type="file" id="photo-upload-input" className="hidden" onChange={handleProcessIncomingPhoto} />
+                    <h1 className="text-bold font-medium mb-12">Select a photo to begin</h1>
+                    <div className="flex flex-col items-center justify-center border-4 border-dashed p-8 rounded-xl cursor-pointer gap-6" onClick={handleImageInputClick}>
+                        <Upload size="5rem" className="text-blue-500" />
+                        <div className={`${buttonClass} w-64 !h-12 text-xl`}>Select Photo</div>
+                    </div>
+                </>
+            ) : (
+                <></>
+            )}
+        </div>
     )
 }

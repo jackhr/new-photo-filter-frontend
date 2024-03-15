@@ -1,5 +1,5 @@
 import './App.css'
-import Index from '../Index/Index';
+import IndexPage from '../IndexPage/IndexPage';
 import { useContext } from 'react';
 import AuthPage from '../AuthPage/AuthPage'
 import ErrorPage from '../ErrorPage/ErrorPage';
@@ -19,7 +19,7 @@ function App() {
     const router = createBrowserRouter(
         createRoutesFromElements(
             <Route path="/" element={<RootLayout />} errorElement={<ErrorPage />}>
-                <Route path="/" element={user ? <Index /> : <LandingPage />} />
+                <Route path="/" element={user ? <IndexPage /> : <LandingPage />} />
                 <Route path="/sign-in" element={<AuthPage showLogin={true} />} />
                 <Route path="/sign-up" element={<AuthPage showLogin={false} />} />
             </Route>

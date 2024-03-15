@@ -22,8 +22,8 @@ export default function Navbar({ showSideMenu, setShowSideMenu, handleSignOut }:
                 {user && (
                     <span className={linkClass}>Hello, {user.name}</span>
                 )}
-                <Menu className="block lg:hidden" size="3rem" color="white" cursor="pointer" onClick={() => setShowSideMenu(!showSideMenu)} />
-                <div className="hidden lg:flex items-center gap-10">
+                <Menu className="block sm:hidden" size="3rem" color="white" cursor="pointer" onClick={() => setShowSideMenu(!showSideMenu)} />
+                <div className="hidden sm:flex items-center gap-10">
                     {user ? (
                         <Link to="" onClick={e => handleSignOut(e)} className={buttonClass}>Sign Out</Link>
                     ) : (

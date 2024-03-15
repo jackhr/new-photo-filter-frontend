@@ -32,11 +32,13 @@ export default function SignUpForm() {
     }
 
     return (
-        <Form className="flex flex-col items-center gap-4" method="post" onSubmit={e => handleSignUp(e)}>
-            <Input type="text" placeholder="Username" name="name" />
-            <Input type="email" placeholder="Email" name="email" />
-            <Input type="password" placeholder="Password" name="password" />
-            <button className="bg-blue-500 rounded-lg px-8 py-2 text-white font-bold transition-all hover:bg-transparent hover:text-blue-500 border-2 border-solid border-blue-500 active:bg-white active:text-white w-full" type="submit">Sign Up</button>
-        </Form>
+        <div className="m-8 mx-auto p-6 flex h-full items-center justify-center w-max">
+            <Form className="flex flex-col items-center gap-4 w-full" method="post" onSubmit={e => handleSignUp(e)}>
+                <Input type="text" placeholder="Username" name="name" />
+                <Input type="email" placeholder="Email" name="email" />
+                <Input type="password" placeholder="Password" name="password" />
+                <button className="bg-blue-500 rounded-lg px-8 py-2 text-white font-bold transition-all hover:bg-transparent hover:text-blue-500 border-2 border-solid border-blue-500 active:bg-white active:text-white w-full" type="submit">Sign Up</button>
+            </Form>
+        </div>
     );
 }
