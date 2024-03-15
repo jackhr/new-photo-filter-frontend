@@ -1,23 +1,15 @@
-import { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useContext, MouseEvent } from "react";
 import { UserContext } from "../../contexts/userContext";
-import { signOut } from "../../utilities/users-service";
 
 interface SideMenuProps {
     showSideMenu: boolean;
+    handleSignOut: (e: MouseEvent) => void;
     setShowSideMenu: (show: boolean) => void;
 }
 
-export default function SideMenu({ showSideMenu, setShowSideMenu }: SideMenuProps) {
-    const navigate = useNavigate();
-    const { user, setUser } = useContext(UserContext);
-    const handleSignOut = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        e.preventDefault();
-        signOut();
-        setUser(null);
-        setShowSideMenu(false);
-        navigate('/');
-    }
+export default function SideMenu({ showSideMenu, setShowSideMenu, handleSignOut }: SideMenuProps) {
+    const { user } = useContext(UserContext);
     const linkClass = "bg-white rounded-lg px-8 py-2 text-blue-500 font-bold transition-all hover:bg-transparent hover:text-white border-2 border-solid border-white active:bg-white active:text-blue-500";
     const sideMenuClass = `absolute left-0 top-0 flex justify-end w-screen h-screen z-10 transition-opacity backdrop-blur-sm overflow-hidden duration-500 ${showSideMenu ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"}`;
 
