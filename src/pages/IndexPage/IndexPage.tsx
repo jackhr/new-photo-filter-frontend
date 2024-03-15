@@ -18,12 +18,12 @@ export default function IndexPage() {
         getPhotos();
     }, [setPhotos]);
 
-    const tabClass = "bg-blue-500 w-1/2 text-center cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-600 active:bg-blue-700 text-white font-bold p-4";
+    const tabClass = "bg-blue-500 w-1/2 text-center cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-600 active:bg-blue-700 text-white font-bold p-4 h-14";
 
     const activeTabClass = "bg-blue-700 hover:bg-blue-700 active:bg-blue-700";
 
     return (
-        <div className="h-full relative flex flex-col justify-center items-center border-blue-300 border-t-2">
+        <div className="relative flex flex-col justify-center items-center border-blue-300 border-t-2 pt-14 h-full">
             <div className="absolute top-0 flex w-full">
                 <div
                     onClick={() => setUploading(true)}
