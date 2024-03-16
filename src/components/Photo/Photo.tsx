@@ -34,9 +34,9 @@ export default function PhotoComponent({ photo }: PhotoProps) {
     }
 
     return (
-        <div className="relative group">
+        <div className="relative group rounded-md overflow-hidden h-fit m-1">
             <X onClick={handleDelete} strokeWidth={3} className="absolute top-3 right-3 bg-white rounded-full flex items-center justify-center h-7 w-7 p-[6px] cursor-pointer opacity-0 group-hover:opacity-100" />
-            <img key={photo._id} src={photo.sourceURL} alt={photo.name} className="max-h-96" />
+            <img key={photo._id} src={photo.sourceURL} alt={photo.name} className="w-full object-cover" />
         </div>
     );
 }
