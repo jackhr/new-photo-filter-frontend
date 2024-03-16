@@ -13,3 +13,9 @@ export function create(payload: FormData) {
         payloadIsFormData: true,
     });
 }
+
+export function deleteOne(photoId: string) {
+    return sendRequest(`${BASE_URL}/${photoId}`, {
+        method: 'DELETE',
+    });
+}
