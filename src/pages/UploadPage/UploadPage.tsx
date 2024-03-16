@@ -5,7 +5,7 @@ import { Upload } from "lucide-react";
 import * as photosAPI from "../../utilities/photos-api";
 import { PhotosContext } from "../../contexts/photosContext";
 
-export default function UploadPage() {
+export default function UploadPage({ setUploading }: { setUploading?: (uploading: boolean) => void }){
     const { setPhotos } = useContext(PhotosContext);
     const handleImageInputClick = () => {
         document.getElementById("photo-upload-input")?.click();
@@ -40,7 +40,15 @@ export default function UploadPage() {
             formData.append("name", photo.name);
             
             const res = await photosAPI.create(formData);
-            res.success && setPhotos(res.data?.photos as Photo[]);
+            swal({
+                title: res.success ? "Success" : "Error",
+                text: res.data?.message,
+                icon: res.success ? "success" : "error",
+            });
+            if (res.success) {
+                setPhotos(res.data?.photos as Photo[]);
+                setUploading && setUploading(false);
+            }
         }
     }
 

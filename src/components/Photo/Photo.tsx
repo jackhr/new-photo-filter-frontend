@@ -12,6 +12,19 @@ interface PhotoProps {
 export default function PhotoComponent({ photo }: PhotoProps) {
     const { setPhotos } = useContext(PhotosContext);
     const handleDelete = async () => {
+        const deletingPhoto = await swal({
+            title: "Are you sure you want to delete this photo?",
+            buttons: {
+                cancel: true,
+                delete: {
+                    text: "Delete",
+                    value: true,
+                    className: "bg-red-500 hover:bg-red-600 text-white font-bold ml-auto",
+                },
+            },
+            icon: "warning",
+        });
+        if (!deletingPhoto) return;
         const res = await deleteOne(photo._id);
         const icon = res.success ? "success" : "error";
         const title = res.success ? "Success" : "Error";

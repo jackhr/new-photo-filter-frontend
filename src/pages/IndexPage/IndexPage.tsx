@@ -35,7 +35,7 @@ export default function IndexPage() {
                 >My Photos ({photos.length})</div>
             </div>
 
-            {uploading ? <UploadPage /> : <PhotosPage /> }
+            {uploading ? <UploadPage setUploading={setUploading} /> : <PhotosPage /> }
         </div>
     )
 }
