@@ -1,5 +1,6 @@
 import "./IndexPage.css"
 import { Photo } from "../../types";
+import { useLocation } from "react-router-dom";
 import UploadPage from "../UploadPage/UploadPage";
 import PhotosPage from "../PhotosPage/PhotosPage";
 import { useEffect, useContext, useState } from "react";
@@ -7,7 +8,8 @@ import * as photosAPI from "../../utilities/photos-api";
 import { PhotosContext } from "../../contexts/photosContext";
 
 export default function IndexPage() {
-    const [uploading, setUploading] = useState(true);
+    const location = useLocation();
+    const [uploading, setUploading] = useState(location.state?.photosTab ? false : true);
     const { photos, setPhotos } = useContext(PhotosContext);
     useEffect(function () {
         async function getPhotos() {
@@ -17,6 +19,7 @@ export default function IndexPage() {
         }
         getPhotos();
     }, [setPhotos]);
+    
 
     const tabClass = "bg-blue-500 w-1/2 text-center cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-600 active:bg-blue-700 text-white font-bold p-4 h-14";
 

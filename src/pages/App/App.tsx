@@ -1,8 +1,9 @@
 import './App.css'
-import IndexPage from '../IndexPage/IndexPage';
 import { useContext } from 'react';
-import AuthPage from '../AuthPage/AuthPage'
+import AuthPage from '../AuthPage/AuthPage';
+import EditPage from '../EditPage/EditPage';
 import ErrorPage from '../ErrorPage/ErrorPage';
+import IndexPage from '../IndexPage/IndexPage';
 import LandingPage from '../LandingPage/LandingPage';
 import RootLayout from '../../layouts/Root/RootLayout';
 import { UserContext } from '../../contexts/userContext';
@@ -22,6 +23,7 @@ function App() {
                 <Route path="/" element={user ? <IndexPage /> : <LandingPage />} />
                 <Route path="/sign-in" element={<AuthPage showLogin={true} />} />
                 <Route path="/sign-up" element={<AuthPage showLogin={false} />} />
+                <Route path="/photos/:id" element={<EditPage />} />
             </Route>
         )
     );
