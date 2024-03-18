@@ -19,3 +19,10 @@ export function deleteOne(photoId: string) {
         method: 'DELETE',
     });
 }
+
+export function applyFilter(photoId: string, filterType: string) {
+    return sendRequest(`${BASE_URL}/${photoId}/filter`, {
+        method: 'POST',
+        payload: { filterType },
+    });
+}
