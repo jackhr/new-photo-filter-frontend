@@ -1,0 +1,26 @@
+.filter-sepia img {
+    filter: sepia(100%);
+}
+
+.filter-grayscale img {
+    filter: grayscale(100%);
+}
+
+.filter-vignette > div::after {
+    content       : "";
+    position      : absolute;
+    top           : 0;
+    left          : 0;
+    width         : 100%;
+    height        : 100%;
+    background    : radial-gradient(circle, transparent 50%, black 100%);
+    pointer-events: none;
+}
+
+.filter-vintage img {
+    filter: sepia(0.4) brightness(90%) contrast(90%);
+}
+
+.filter-contrast img {
+    filter: contrast(1.5);
+}
