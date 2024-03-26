@@ -40,6 +40,6 @@ export async function generateFileForOnePhoto(photo: Photo): Promise<Photo> {
     return photo;
 }
 
-export async function generateFileForManyPhotos(photos: Photo[]): Promise<Photo[]> {
+export async function generateFilesForManyPhotos(photos: Photo[]): Promise<Photo[]> {
     return await Promise.all(photos.map(async (photo) => generateFileForOnePhoto(photo)));
 }
