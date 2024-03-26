@@ -1,9 +1,9 @@
-import Navbar from "../../components/Navbar/Navbar";
+import Navbar from "@/components/Navbar/Navbar";
+import { signOut } from "@/utilities/users-service";
+import { UserContext } from "@/contexts/userContext";
+import SideMenu from "@/components/SideMenu/SideMenu";
 import { Outlet, useNavigate } from "react-router-dom";
-import { signOut } from "../../utilities/users-service";
-import { UserContext } from "../../contexts/userContext";
 import { useState, useContext, MouseEvent } from "react";
-import SideMenu from "../../components/SideMenu/SideMenu";
 
 export default function RootLayout() {
     const navigate = useNavigate();

@@ -1,10 +1,10 @@
 import swal from "sweetalert";
 import { X } from "lucide-react";
-import { Photo } from "../../types";
+import { Photo } from "@/types";
 import { useNavigate } from "react-router-dom";
 import { MouseEvent, useContext } from "react";
-import { deleteOne } from "../../utilities/photos-api";
-import { PhotosContext } from "../../contexts/photosContext";
+import { deleteOne } from "@/utilities/photos-api";
+import { PhotosContext } from "@/contexts/photosContext";
 
 interface PhotoProps {
     photo: Photo;

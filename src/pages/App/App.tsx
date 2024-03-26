@@ -1,12 +1,12 @@
 import './App.css'
 import { useContext } from 'react';
-import AuthPage from '../AuthPage/AuthPage';
-import EditPage from '../EditPage/EditPage';
-import ErrorPage from '../ErrorPage/ErrorPage';
-import IndexPage from '../IndexPage/IndexPage';
-import LandingPage from '../LandingPage/LandingPage';
-import RootLayout from '../../layouts/Root/RootLayout';
-import { UserContext } from '../../contexts/userContext';
+import AuthPage from '@/pages/AuthPage/AuthPage';
+import EditPage from '@/pages/EditPage/EditPage';
+import RootLayout from '@/layouts/Root/RootLayout';
+import ErrorPage from '@/pages/ErrorPage/ErrorPage';
+import IndexPage from '@/pages/IndexPage/IndexPage';
+import { UserContext } from '@/contexts/userContext';
+import LandingPage from '@/pages/LandingPage/LandingPage';
 import {
     Route,
     RouterProvider,

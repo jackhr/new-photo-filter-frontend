@@ -1,8 +1,7 @@
-import axios, { AxiosRequestConfig, Method, ResponseType } from 'axios';
+import { MainRes } from '@/types';
 import { getToken } from './users-service';
-import { MainRes } from '../types';
+import axios, { AxiosRequestConfig, Method, ResponseType } from 'axios';
 
-// Define TypeScript interface for optional function parameters
 interface SendRequestOptions {
     method?: Method;
     payload?: unknown | FormData | null; 

@@ -1,11 +1,11 @@
 import "./EditPage.css";
-import { Photo } from "../../types";
+import { Photo } from "@/types";
+import { PhotosContext } from "@/contexts/photosContext";
 import { ChevronLeft, Crop, Filter } from "lucide-react";
 import { useParams, useNavigate } from "react-router-dom";
-import { PhotosContext } from "../../contexts/photosContext";
 import { useCallback, useContext, useEffect, useState } from "react";
-import ReactAvatarEditor from "../../components/ReactAvatarEditor/ReactAvatarEditor";
-import ReactPhotoEditorComponent from "../../components/ReactPhotoEditor/ReactPhotoEditor";
+import ReactAvatarEditor from "@/components/ReactAvatarEditor/ReactAvatarEditor";
+import ReactPhotoEditorComponent from "@/components/ReactPhotoEditor/ReactPhotoEditor";
 
 export default function EditPage() {
     const { id } = useParams();

@@ -1,8 +1,8 @@
 import { useContext } from "react"
-import UploadPage from "../UploadPage/UploadPage";
-import PhotoComponent from "../../components/Photo/Photo";
-import { PhotosContext } from "../../contexts/photosContext"
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry"
+import PhotoComponent from "@/components/Photo/Photo";
+import UploadPage from "@/pages/UploadPage/UploadPage";
+import { PhotosContext } from "@/contexts/photosContext";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 export default function PhotosPage() {
     const { photos } = useContext(PhotosContext);

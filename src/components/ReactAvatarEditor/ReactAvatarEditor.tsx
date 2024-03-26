@@ -1,5 +1,5 @@
 import { FC as ReactFC } from 'react';
-import { EditorProps } from '../../types';
+import { EditorProps } from '@/types';
 import AvatarEditor from 'react-avatar-editor';
 
 const ReactAvatarEditor: ReactFC<EditorProps> = ({ photo }) => {

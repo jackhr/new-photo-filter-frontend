@@ -1,10 +1,10 @@
 import swal from "sweetalert";
-import Input from "../Input/Input";
-import { User } from "../../types";
+import { User } from "@/types";
+import Input from "@/components/Input/Input";
 import { FormEvent, useContext } from "react";
 import { Form, useNavigate } from "react-router-dom";
-import { UserContext } from "../../contexts/userContext";
-import * as UsersService from "../../utilities/users-service";
+import { UserContext } from "@/contexts/userContext";
+import * as UsersService from "@/utilities/users-service";
 
 export default function SignUpForm() {
     const { setUser } = useContext(UserContext);

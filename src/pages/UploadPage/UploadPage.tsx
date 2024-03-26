@@ -1,9 +1,9 @@
 import swal from "sweetalert";
+import { Photo } from "@/types";
 import { useContext } from "react";
-import { Photo } from "../../types";
 import { Upload } from "lucide-react";
-import * as photosAPI from "../../utilities/photos-api";
-import { PhotosContext } from "../../contexts/photosContext";
+import * as photosAPI from "@/utilities/photos-api";
+import { PhotosContext } from "@/contexts/photosContext";
 
 export default function UploadPage({ setUploading }: { setUploading?: (uploading: boolean) => void }){
     const { setPhotos } = useContext(PhotosContext);

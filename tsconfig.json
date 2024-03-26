@@ -5,6 +5,10 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "paths": {
+        "@/*": ["./src/*"],
+        "react-photo-editor": ["./node_modules/react-photo-editor/dist/index.d.ts"]
+    },
 
     /* Bundler mode */
     "moduleResolution": "bundler",

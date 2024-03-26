@@ -1,5 +1,5 @@
-import { MainRes, User, UserLoginData, UserSignUpData } from '../types';
 import * as usersAPI from './users-api';
+import { MainRes, User, UserLoginData, UserSignUpData } from '@/types';
 
 export async function signIn(credentials: UserLoginData): Promise<MainRes> {
     try {

@@ -1,11 +1,11 @@
 import "./IndexPage.css"
-import { Photo } from "../../types";
+import { Photo } from "@/types";
 import { useLocation } from "react-router-dom";
 import UploadPage from "../UploadPage/UploadPage";
 import PhotosPage from "../PhotosPage/PhotosPage";
+import * as photosAPI from "@/utilities/photos-api";
 import { useEffect, useContext, useState } from "react";
-import * as photosAPI from "../../utilities/photos-api";
-import { PhotosContext } from "../../contexts/photosContext";
+import { PhotosContext } from "@/contexts/photosContext";
 
 export default function IndexPage() {
     const location = useLocation();

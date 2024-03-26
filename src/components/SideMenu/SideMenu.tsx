@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useContext, MouseEvent } from "react";
-import { UserContext } from "../../contexts/userContext";
+import { UserContext } from "@/contexts/userContext";
 
 interface SideMenuProps {
     showSideMenu: boolean;

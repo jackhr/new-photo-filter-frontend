@@ -1,5 +1,5 @@
-import { UserLoginData, UserSignUpData } from '../types';
 import { sendRequest } from './send-request';
+import { UserLoginData, UserSignUpData } from '@/types';
 
 const BASE_URL = "/api/users";
 

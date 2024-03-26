@@ -1,5 +1,5 @@
 import { FC as ReactFC } from 'react';
-import { EditorProps } from '../../types';
+import { EditorProps } from '@/types';
 import { ReactPhotoEditor } from 'react-photo-editor';
 
 const ReactPhotoEditorComponent: ReactFC<EditorProps> = ({ photo, onImageChange }) => {
