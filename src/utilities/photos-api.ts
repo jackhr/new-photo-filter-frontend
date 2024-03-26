@@ -26,3 +26,7 @@ export function applyFilter(photoId: string, filterType: string) {
         payload: { filterType },
     });
 }
+
+export function getPhotoAsBlob(signUrl: string) {
+    return sendRequest(signUrl, { responseType: 'blob' });
+}

@@ -14,12 +14,27 @@ export default function IndexPage() {
     useEffect(function () {
         async function getPhotos() {
             const res = await photosAPI.getAll();
-            console.log(res);
+            const photos = res.data?.photos as Photo[];
+            await Promise.all(photos.map(async (photo) => {
+                try {
+                    if (photo.signedUrl) {
+                        const blobRes = await photosAPI.getPhotoAsBlob(photo.signedUrl);
+                        const imageFile = new File(
+                            [blobRes.data as Blob],
+                            photo.name,
+                            { type: blobRes.data?.type }
+                        );
+                        photo.file = imageFile;
+                    }
+                } catch (error) {
+                    console.error("Error generating file:", error);
+                }
+            }));
             setPhotos(res.data?.photos as Photo[]);
         }
         getPhotos();
     }, [setPhotos]);
-    
+
 
     const tabClass = "bg-blue-500 w-1/2 text-center cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-600 active:bg-blue-700 text-white font-bold p-4 h-14";
 
@@ -38,7 +53,7 @@ export default function IndexPage() {
                 >My Photos ({photos.length})</div>
             </div>
 
-            {uploading ? <UploadPage setUploading={setUploading} /> : <PhotosPage /> }
+            {uploading ? <UploadPage setUploading={setUploading} /> : <PhotosPage />}
         </div>
     )
 }

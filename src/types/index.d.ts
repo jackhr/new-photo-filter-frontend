@@ -19,6 +19,11 @@ export interface UserLoginData {
     password: string;
 }
 
+export interface EditorProps {
+    photo: File | string | undefined;
+    onImageChange: (newPhoto: File) => void;
+}
+
 type User = {
     _v: number;
     _id: string;
@@ -37,6 +42,8 @@ type Photo = {
     sourceURL: string;
     newEditURLs: string[];
     AWSKey: string;
+    signedUrl?: string;
+    file?: File;
     createdAt: string;
     updatedAt: string;
 }

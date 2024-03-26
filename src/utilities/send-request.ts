@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, Method } from 'axios';
+import axios, { AxiosRequestConfig, Method, ResponseType } from 'axios';
 import { getToken } from './users-service';
 import { MainRes } from '../types';
 
@@ -7,33 +7,34 @@ interface SendRequestOptions {
     method?: Method;
     payload?: unknown | FormData | null; 
     payloadIsFormData?: boolean;
+    responseType?: ResponseType;
 }
 
 export async function sendRequest(url: string, options: SendRequestOptions = {}) {
-    const { method = 'GET', payload = null, payloadIsFormData = false } = options;
-
+    const { method = 'GET', payload = null, payloadIsFormData = false, responseType = 'json' } = options;
     const axiosConfig: AxiosRequestConfig = {
         method,
         url,
-        headers: {},
+        responseType
     };
+    const token = getToken();
 
+    if (token && responseType !== 'blob') {
+        if (!axiosConfig.headers) axiosConfig.headers = {};
+        axiosConfig.headers['Authorization'] = `Bearer ${token}`;
+    }
+    
     if (payload) {
         if (!axiosConfig.headers) axiosConfig.headers = {};
         axiosConfig.headers['Content-Type'] = payloadIsFormData ? 'multipart/form-data' : 'application/json';
         axiosConfig.data = payload;
     }
 
-    const token = getToken();
-    if (token) {
-        if (!axiosConfig.headers) axiosConfig.headers = {};
-        axiosConfig.headers['Authorization'] = `Bearer ${token}`;
-    }
-
     const res = {
         data: null,
         success: true,
     } as MainRes;
+
     try {
         const response = await axios(axiosConfig);
         res.data = response.data;
