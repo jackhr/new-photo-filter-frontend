@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import UploadPage from "../UploadPage/UploadPage";
 import PhotosPage from "../PhotosPage/PhotosPage";
 import * as photosAPI from "@/utilities/photos-api";
+import { generateFileForManyPhotos } from "@/utilities/photos-service";
 import { useEffect, useContext, useState } from "react";
 import { PhotosContext } from "@/contexts/photosContext";
 
@@ -14,23 +15,8 @@ export default function IndexPage() {
     useEffect(function () {
         async function getPhotos() {
             const res = await photosAPI.getAll();
-            const photos = res.data?.photos as Photo[];
-            await Promise.all(photos.map(async (photo) => {
-                try {
-                    if (photo.signedUrl) {
-                        const blobRes = await photosAPI.getPhotoAsBlob(photo.signedUrl);
-                        const imageFile = new File(
-                            [blobRes.data as Blob],
-                            photo.name,
-                            { type: blobRes.data?.type }
-                        );
-                        photo.file = imageFile;
-                    }
-                } catch (error) {
-                    console.error("Error generating file:", error);
-                }
-            }));
-            setPhotos(res.data?.photos as Photo[]);
+            const photos = await generateFileForManyPhotos(res.data?.photos as Photo[]);
+            setPhotos(photos);
         }
         getPhotos();
     }, [setPhotos]);

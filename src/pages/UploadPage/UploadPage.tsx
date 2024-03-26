@@ -4,9 +4,10 @@ import { useContext } from "react";
 import { Upload } from "lucide-react";
 import * as photosAPI from "@/utilities/photos-api";
 import { PhotosContext } from "@/contexts/photosContext";
+import { generateFileForOnePhoto } from "@/utilities/photos-service";
 
 export default function UploadPage({ setUploading }: { setUploading?: (uploading: boolean) => void }){
-    const { setPhotos } = useContext(PhotosContext);
+    const { photos, setPhotos } = useContext(PhotosContext);
     const handleImageInputClick = () => {
         document.getElementById("photo-upload-input")?.click();
     }
@@ -46,7 +47,9 @@ export default function UploadPage({ setUploading }: { setUploading?: (uploading
                 icon: res.success ? "success" : "error",
             });
             if (res.success) {
-                setPhotos(res.data?.photos as Photo[]);
+                const newPhotoWithFile = await generateFileForOnePhoto(res.data?.photo as Photo);
+                const newPhotos: Photo[] = [...photos, newPhotoWithFile];
+                setPhotos(newPhotos);
                 setUploading && setUploading(false);
             }
         }
