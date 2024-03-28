@@ -3,6 +3,22 @@ export type MainRes = {
     success: boolean
 }
 
+type GhostPhoto = string | null;
+
+export interface GhostPhotoProps {
+    ghostPhoto: GhostPhoto;
+}
+
+export interface PhotosPageProps {
+    ghostPhoto: GhostPhoto;
+    setGhostPhoto: (ghostPhoto: GhostPhoto) => void;
+}
+
+export interface UploadPageProps {
+    setUploading?: (uploading: boolean) => void;
+    setGhostPhoto: (ghostPhoto: GhostPhoto) => void;
+}
+
 export interface LoginFormProps {
     showLogin: boolean;
     setShowLogin: (showLogin: boolean) => void;

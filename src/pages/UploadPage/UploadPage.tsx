@@ -1,12 +1,12 @@
 import swal from "sweetalert";
-import { Photo } from "@/types";
 import { useContext } from "react";
 import { Upload } from "lucide-react";
+import { Photo, UploadPageProps } from "@/types";
 import * as photosAPI from "@/utilities/photos-api";
 import { PhotosContext } from "@/contexts/photosContext";
 import { generateFileForOnePhoto } from "@/utilities/photos-service";
 
-export default function UploadPage({ setUploading }: { setUploading?: (uploading: boolean) => void }){
+export default function UploadPage({ setUploading, setGhostPhoto }: UploadPageProps){
     const { photos, setPhotos } = useContext(PhotosContext);
     const handleImageInputClick = () => {
         document.getElementById("photo-upload-input")?.click();
@@ -17,7 +17,9 @@ export default function UploadPage({ setUploading }: { setUploading?: (uploading
             const photo = (input as HTMLInputElement).files?.[0];
             if (!photo) return;
             const img = new Image();
-            img.src = URL.createObjectURL(photo);
+            const igmSrc = URL.createObjectURL(photo);
+            setGhostPhoto(igmSrc);
+            img.src = igmSrc;
             img.className = "max-h-96 m-auto";
             const upload = await swal({
                 title: "Are you sure you want to upload this photo?",
@@ -34,24 +36,26 @@ export default function UploadPage({ setUploading }: { setUploading?: (uploading
                     element: img,
                 }
             });
-            if (!upload) return;
-            
-            const formData = new FormData();
-            formData.append("photo", photo);
-            formData.append("name", photo.name);
-            
-            const res = await photosAPI.create(formData);
-            swal({
-                title: res.success ? "Success" : "Error",
-                text: res.data?.message,
-                icon: res.success ? "success" : "error",
-            });
-            if (res.success) {
-                const newPhotoWithFile = await generateFileForOnePhoto(res.data?.photo as Photo);
-                const newPhotos: Photo[] = [...photos, newPhotoWithFile];
-                setPhotos(newPhotos);
-                setUploading && setUploading(false);
+            if (upload) {
+                const formData = new FormData();
+                formData.append("photo", photo);
+                formData.append("name", photo.name);
+                
+                const res = await photosAPI.create(formData);
+                swal({
+                    title: res.success ? "Success" : "Error",
+                    text: res.data?.message,
+                    icon: res.success ? "success" : "error",
+                });
+                if (res.success) {
+                    const newPhotoWithFile = await generateFileForOnePhoto(res.data?.photo as Photo);
+                    const newPhotos: Photo[] = [...photos, newPhotoWithFile];
+                    setPhotos(newPhotos);
+                    setUploading && setUploading(false);
+                }
             }
+            
+            setGhostPhoto(null);
         }
     }
 

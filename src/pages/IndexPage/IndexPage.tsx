@@ -8,6 +8,7 @@ import { PhotosContext } from "@/contexts/photosContext";
 export default function IndexPage() {
     const [uploading, setUploading] = useState(false);
     const { photos, fetchingPhotos } = useContext(PhotosContext);
+    const [ghostPhoto, setGhostPhoto] = useState<string | null>(null);
 
     const tabClass = "bg-blue-500 w-1/2 text-center cursor-pointer transition-all duration-300 ease-in-out hover:bg-blue-600 active:bg-blue-700 text-white font-bold p-4 h-14 flex items-center m-auto justify-center";
     const activeTabClass = "bg-blue-700 hover:bg-blue-700 active:bg-blue-700";
@@ -26,7 +27,11 @@ export default function IndexPage() {
                 </div>
             </div>
 
-            {uploading ? <UploadPage setUploading={setUploading} /> : <PhotosPage />}
+            {uploading ? (
+                <UploadPage setUploading={setUploading} setGhostPhoto={setGhostPhoto} />
+            ) : (
+                <PhotosPage ghostPhoto={ghostPhoto} setGhostPhoto={setGhostPhoto} />
+            )}
         </div>
     )
 }
