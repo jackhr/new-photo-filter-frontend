@@ -1,13 +1,17 @@
 import swal from "sweetalert";
-import { User } from "@/types";
+import { Photo, User } from "@/types";
 import Input from "@/components/Input/Input";
 import { FormEvent, useContext } from "react";
+import * as photosAPI from '@/utilities/photos-api';
 import { Form, useNavigate } from "react-router-dom";
 import { UserContext } from "@/contexts/userContext";
+import { PhotosContext } from "@/contexts/photosContext";
 import * as UsersService from "@/utilities/users-service";
+import { generateFilesForManyPhotos } from "@/utilities/photos-service";
 
 export default function SignInForm() {
     const { setUser } = useContext(UserContext);
+    const { setPhotos, setFetchingPhotos } = useContext(PhotosContext);
     const navigate = useNavigate();
 
     const handleSignIn = async (e: FormEvent) => {
@@ -22,6 +26,12 @@ export default function SignInForm() {
         if (res.success) {
             setUser(res?.data?.user as User);
             navigate('/');
+            // fetch photos
+            setFetchingPhotos(true);
+            const photosRes = await photosAPI.getAll();
+            const photos = await generateFilesForManyPhotos(photosRes.data?.photos as Photo[]);
+            setPhotos(photos);
+            setFetchingPhotos(false);
         } else {
             swal({
                 text: res?.data?.message,
