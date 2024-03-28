@@ -20,15 +20,17 @@ import {
 
 function App() {
     const { user } = useContext(UserContext);
-    const { setPhotos } = useContext(PhotosContext);
+    const { setPhotos, setFetchingPhotos } = useContext(PhotosContext);
     useEffect(function () {
         async function getPhotos() {
+            setFetchingPhotos(true);
             const res = await photosAPI.getAll();
             const photos = await generateFilesForManyPhotos(res.data?.photos as Photo[]);
             setPhotos(photos);
+            setFetchingPhotos(false);
         }
-        getPhotos();
-    }, [setPhotos]);
+        user && getPhotos();
+    }, [setFetchingPhotos, setPhotos, user]);
 
     const router = createBrowserRouter(
         createRoutesFromElements(

@@ -1,6 +1,6 @@
 import { useContext } from "react"
+import { GridLoader } from "react-spinners";
 import PhotoComponent from "@/components/Photo/Photo";
-import UploadPage from "@/pages/UploadPage/UploadPage";
 import { PhotosContext } from "@/contexts/photosContext";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
@@ -11,7 +11,7 @@ export default function PhotosPage() {
             {photos.length ? (
                 <div className="h-full w-full overflow-auto">
                     <ResponsiveMasonry
-                        columnsCountBreakPoints={{350: 1, 750: 2, 900: 3, 1200: 4}}
+                        columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3, 1200: 4 }}
                     >
                         <Masonry className="p-1">
                             {photos.map(photo => (
@@ -21,7 +21,7 @@ export default function PhotosPage() {
                     </ResponsiveMasonry>
                 </div>
             ) : (
-                <UploadPage />
+                <GridLoader color="#3e85f8" />
             )}
         </div>
     )

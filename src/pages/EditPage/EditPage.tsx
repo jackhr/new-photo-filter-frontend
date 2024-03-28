@@ -17,7 +17,6 @@ export default function EditPage() {
     const filterNames = ['original','contrast','grayscale','sepia','vignette','vintage'];
     const goBackToPhotos = useCallback(() => navigate('/', {
         replace: true,
-        state: { photosTab: true }
     }), [navigate]);
     
     useEffect(() => {
